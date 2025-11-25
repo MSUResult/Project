@@ -3,17 +3,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { slides } from "../data/data";
 
-interface Slide {
-  id: number | string;
-  name: string;
-  rating: number;
-  heading: string;
-  text: string;
-}
-
-export default function InfiniteSlider() {
+export default function Slider() {
   const originalLength = slides.length;
-  const extendedSlides: Slide[] = [...slides, ...slides, ...slides];
+  const extendedSlides = [...slides, ...slides, ...slides];
 
   const [currentIndex, setCurrentIndex] = useState(originalLength);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -33,7 +25,7 @@ export default function InfiniteSlider() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const getInitials = (name: string = ""): string =>
+  const getInitials = (name = "") =>
     name
       .trim()
       .split(/\s+/)
@@ -70,31 +62,26 @@ export default function InfiniteSlider() {
   }, [handleNext]);
 
   return (
-    <main className="min-h-screen bg-background flex flex-col items-center justify-center p-6 font-sans">
+    <section className="min-h-screen bg-[#F3F3F3] flex flex-col items-center justify-center p-6 font-sans">
       <div className="w-full max-w-7xl mx-auto">
-        {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-10 px-4">
           <div>
-            <h3 className="text-blue-600 font-semibold uppercase tracking-wide text-xs mb-2">
+            <h1 className="text-[32px] font-bold text-black mb-2">
               Testimonials
-            </h3>
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-              What our clients say
             </h1>
           </div>
 
-          {/* Controls */}
           <div className="flex gap-3 mt-5 md:mt-0">
             <button
               onClick={handlePrev}
-              className="p-3 rounded-full bg-white border border-gray-300 shadow hover:bg-blue-600 hover:text-white transition active:scale-95"
+              className="p-3 rounded-full bg-white border border-gray-300 shadow hover:bg-black hover:text-white transition active:scale-95"
               aria-label="Previous"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={handleNext}
-              className="p-3 rounded-full bg-white border border-gray-300 shadow hover:bg-blue-600 hover:text-white transition active:scale-95"
+              className="p-3 rounded-full bg-white border border-gray-300 shadow hover:bg-black hover:text-white transition active:scale-95"
               aria-label="Next"
             >
               <ChevronRight className="w-5 h-5" />
@@ -102,7 +89,6 @@ export default function InfiniteSlider() {
           </div>
         </div>
 
-        {/* Carousel */}
         <div className="overflow-hidden w-full">
           <div
             className="flex"
@@ -122,12 +108,12 @@ export default function InfiniteSlider() {
               >
                 <div className="bg-white p-7 rounded-2xl shadow border border-gray-200 h-full flex flex-col justify-between hover:shadow-lg transition">
                   <div className="flex items-center gap-4 mb-5">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow">
+                    <div className="w-12 h-12 rounded-full bg-black text-white flex items-center justify-center font-bold text-lg shadow">
                       {getInitials(item.name)}
                     </div>
 
                     <div>
-                      <h3 className="font-semibold text-foreground">
+                      <h3 className="font-semibold text-black text-[18px]">
                         {item.name}
                       </h3>
                       <div className="flex gap-0.5">
@@ -146,10 +132,11 @@ export default function InfiniteSlider() {
                     </div>
                   </div>
 
-                  <h2 className="text-lg font-bold text-gray-900 mb-2">
+                  <h2 className="text-[20px] font-semibold text-black mb-2">
                     {item.heading}
                   </h2>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+
+                  <p className="text-[18px] leading-relaxed text-[#787878]">
                     {item.text}
                   </p>
                 </div>
@@ -158,6 +145,6 @@ export default function InfiniteSlider() {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 }
